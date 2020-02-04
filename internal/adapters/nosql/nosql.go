@@ -89,8 +89,8 @@ func (s *Storage) EditEvent(ctx context.Context, id uint, e *entities.Event) err
 }
 func (s *Storage) String() string {
 	result := "Storage:\n-------\n"
-	for _, value := range s.events {
-		result += fmt.Sprintf("\tEvent:%s by %s\n\t\t%s. Time: %v-%v\n---\n", value.Title, value.Owner, value.Description, value.Start, value.End)
+	for key, value := range s.events {
+		result += fmt.Sprintf("\tEvent:%s[%d] by %s\n\t\t%s. Time: %v-%v\n---\n", value.Title, key, value.Owner, value.Description, value.Start, value.End)
 	}
 	return result
 }
