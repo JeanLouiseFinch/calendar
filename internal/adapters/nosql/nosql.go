@@ -9,12 +9,14 @@ import (
 	"github.com/JeanLouiseFinch/calendar/internal/domain/errors"
 )
 
+// Storage - nasha hranilka
 type Storage struct {
 	events    map[uint]*entities.Event
 	currIndex uint
 	mutex     *sync.Mutex
 }
 
+// NewStorage - sozdaem hranilishe
 func NewStorage() *Storage {
 	return &Storage{
 		events: make(map[uint]*entities.Event, 0),
@@ -22,7 +24,8 @@ func NewStorage() *Storage {
 	}
 }
 
-func (s *Storage) AddEvent(ctx context.Context, e *entities.Event) error {
+// AddEvent - realizacia interface
+func (s *Storage) AddEvent(ctx context.Context, e *entities.Event) (id uint,error) {
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
 	was := false
@@ -34,10 +37,12 @@ func (s *Storage) AddEvent(ctx context.Context, e *entities.Event) error {
 	if !was {
 		s.currIndex++
 		s.events[s.currIndex] = e
-		return nil
+		return s.currIndex,nil
 	}
-	return errors.ErrEventBusy
+	return 0,errors.ErrEventBusy
 }
+
+// DeleteEvent - realizacia interface
 func (s *Storage) DeleteEvent(ctx context.Context, id uint) error {
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
@@ -47,12 +52,16 @@ func (s *Storage) DeleteEvent(ctx context.Context, id uint) error {
 	}
 	return errors.ErrEventNotFound
 }
+
+// GetEventByID - realizacia interface
 func (s *Storage) GetEventByID(ctx context.Context, id uint) (*entities.Event, error) {
 	if _, ok := s.events[id]; ok {
 		return s.events[id], nil
 	}
 	return nil, errors.ErrEventNotFound
 }
+
+// GetEventsByTitle - realizacia interface
 func (s *Storage) GetEventsByTitle(ctx context.Context, title string) ([]*entities.Event, error) {
 	result := make([]*entities.Event, 0, 0)
 	for _, value := range s.events {
@@ -66,6 +75,7 @@ func (s *Storage) GetEventsByTitle(ctx context.Context, title string) ([]*entiti
 	return nil, errors.ErrEventNotFound
 }
 
+// GetEventsByOwner - realizacia interface
 func (s *Storage) GetEventsByOwner(ctx context.Context, owner string) ([]*entities.Event, error) {
 	result := make([]*entities.Event, 0, 0)
 	for _, value := range s.events {
@@ -78,6 +88,8 @@ func (s *Storage) GetEventsByOwner(ctx context.Context, owner string) ([]*entiti
 	}
 	return nil, errors.ErrEventNotFound
 }
+
+// EditEvent - realizacia interface
 func (s *Storage) EditEvent(ctx context.Context, id uint, e *entities.Event) error {
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
@@ -87,6 +99,8 @@ func (s *Storage) EditEvent(ctx context.Context, id uint, e *entities.Event) err
 	}
 	return errors.ErrEventNotFound
 }
+
+// String - realizacia interface
 func (s *Storage) String() string {
 	result := "Storage:\n-------\n"
 	for key, value := range s.events {
