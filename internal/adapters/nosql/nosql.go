@@ -36,7 +36,7 @@ func (s *Storage) AddEvent(ctx context.Context, e *entities.Event) error {
 		s.events[s.currIndex] = e
 		return nil
 	}
-	return error.ErrEventBusy
+	return errors.ErrEventBusy
 }
 func (s *Storage) DeleteEvent(ctx context.Context, id uint) error {
 	s.mutex.Lock()
@@ -45,13 +45,13 @@ func (s *Storage) DeleteEvent(ctx context.Context, id uint) error {
 		delete(s.events[id])
 		return nil
 	}
-	return error.ErrEventNotFound
+	return errors.ErrEventNotFound
 }
 func (s *Storage) GetEventByID(ctx context.Context, id uint) (*entities.Event, error) {
 	if _, ok := s.events[id]; ok {
 		return s.events[id]
 	}
-	return error.ErrEventNotFound
+	return errors.ErrEventNotFound
 }
 func (s *Storage) GetEventsByTitle(ctx context.Context, title string) ([]*entities.Event, error) {
 	result := make([]*entities.Event, 0, 0)
@@ -63,7 +63,7 @@ func (s *Storage) GetEventsByTitle(ctx context.Context, title string) ([]*entiti
 	if len(result) > 0 {
 		return result, nil
 	}
-	return nil, error.ErrEventNotFound
+	return nil, errors.ErrEventNotFound
 }
 
 func (s *Storage) GetEventsByOwner(ctx context.Context, owner string) ([]*entities.Event, error) {
@@ -76,7 +76,7 @@ func (s *Storage) GetEventsByOwner(ctx context.Context, owner string) ([]*entiti
 	if len(result) > 0 {
 		return result, nil
 	}
-	return nil, error.ErrEventNotFound
+	return nil, errors.ErrEventNotFound
 }
 func (s *Storage) EditEvent(ctx context.Context, id uint, e *entities.Event) error {
 	s.mutex.Lock()
@@ -85,7 +85,7 @@ func (s *Storage) EditEvent(ctx context.Context, id uint, e *entities.Event) err
 		s.events[id] = e
 		return nil
 	}
-	return error.ErrEventNotFound
+	return errors.ErrEventNotFound
 }
 func (s *Storage) String() string {
 	result := "Storage:\n-------\n"
