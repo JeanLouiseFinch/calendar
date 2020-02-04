@@ -7,5 +7,6 @@ func (ee EventError) Error() string {
 }
 
 var (
-	ErrBusy = EventError("Vremya zanyato")
+	ErrEventBusy     = EventError("Vremya zanyato")
+	ErrEventNotFound = EventError("Sobutie ne naideno")
 )

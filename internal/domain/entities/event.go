@@ -4,9 +4,9 @@ import "time"
 
 //Event - nashe vse
 type Event struct {
-	start       time.Time
-	end         time.Time
-	owner       string
-	title       string
-	description string
+	Start       time.Time
+	End         time.Time
+	Owner       string
+	Title       string
+	Description string
 }
