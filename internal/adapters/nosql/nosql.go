@@ -10,14 +10,14 @@ import (
 )
 
 type Storage struct {
-	events    map[int]*entities.Event
-	currIndex int
+	events    map[uint]*entities.Event
+	currIndex uint
 	mutex     *sync.Mutex
 }
 
 func NewStorage() *Storage {
 	return &Storage{
-		events: make(map[int]*entities.Event, 0),
+		events: make(map[uint]*entities.Event, 0),
 		mutex:  &sync.Mutex{},
 	}
 }
@@ -42,16 +42,16 @@ func (s *Storage) DeleteEvent(ctx context.Context, id uint) error {
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
 	if _, ok := s.events[id]; ok {
-		delete(s.events[id])
+		delete(s.events, id)
 		return nil
 	}
 	return errors.ErrEventNotFound
 }
 func (s *Storage) GetEventByID(ctx context.Context, id uint) (*entities.Event, error) {
 	if _, ok := s.events[id]; ok {
-		return s.events[id]
+		return s.events[id], nil
 	}
-	return errors.ErrEventNotFound
+	return nil, errors.ErrEventNotFound
 }
 func (s *Storage) GetEventsByTitle(ctx context.Context, title string) ([]*entities.Event, error) {
 	result := make([]*entities.Event, 0, 0)
@@ -90,6 +90,7 @@ func (s *Storage) EditEvent(ctx context.Context, id uint, e *entities.Event) err
 func (s *Storage) String() string {
 	result := "Storage:\n-------\n"
 	for _, value := range s.events {
-		result += fmt.Printf("\tEvent:%s by %s\n\t\t%s. Time: %v-%v\n---\n", value.Title, value.Owner, value.Description, value.Start, value.End)
+		result += fmt.Sprintf("\tEvent:%s by %s\n\t\t%s. Time: %v-%v\n---\n", value.Title, value.Owner, value.Description, value.Start, value.End)
 	}
+	return result
 }
