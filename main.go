@@ -6,7 +6,7 @@ import (
 
 	"github.com/JeanLouiseFinch/calendar/internal/adapters/nosql"
 	"github.com/JeanLouiseFinch/calendar/internal/domain/entities"
-	"github.com/JeanLouiseFinch/calendar/internal/domain/error"
+	"github.com/JeanLouiseFinch/calendar/internal/domain/errors"
 )
 
 func main() {

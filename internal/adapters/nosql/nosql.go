@@ -6,7 +6,7 @@ import (
 	"sync"
 
 	"github.com/JeanLouiseFinch/calendar/internal/domain/entities"
-	"github.com/JeanLouiseFinch/calendar/internal/domain/error"
+	"github.com/JeanLouiseFinch/calendar/internal/domain/errors"
 )
 
 type Storage struct {
