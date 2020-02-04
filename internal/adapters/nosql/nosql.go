@@ -27,7 +27,7 @@ func (s *Storage) AddEvent(ctx context.Context, e *entities.Event) error {
 	defer s.mutex.Unlock()
 	was := false
 	for _, value := range s.events {
-		if (e.Start.After(value.Start) && e.Start.Before(value.End)) || (e.End.After(value.Start) && e.End.Before(value.End)) {
+		if (e.Start.After(value.Start) && e.Start.Before(value.End)) || (e.End.After(value.Start) && e.End.Before(value.End) || e.Start.Equal(value.Start) || e.Start.Equal(value.End) || e.End.Equal(value.Start) || e.End.Equal(value.End)) {
 			was = true
 		}
 	}

@@ -33,9 +33,10 @@ func main() {
 		panic(err)
 	}
 	fmt.Println(storage)
-	err = storage.DeleteEvent(context.Background(), 0)
+	err = storage.DeleteEvent(context.Background(), 2)
 	if err != nil {
 		panic(err)
 	}
 	fmt.Println(storage)
+
 }
