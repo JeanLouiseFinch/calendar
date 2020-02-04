@@ -17,15 +17,15 @@ func TestAddEvent(t *testing.T) {
 		&entities.Event{Title: "Event3", Owner: "me", Description: "wow3", Start: time.Now().AddDate(0, 0, 2), End: time.Now().AddDate(0, 0, 3)},
 	}
 	storage := nosql.NewStorage()
-	err := storage.AddEvent(context.Background(), events[0])
+	_, err := storage.AddEvent(context.Background(), events[0])
 	if err != nil {
 		t.Error("Expected nil, got ", err)
 	}
-	err = storage.AddEvent(context.Background(), events[1])
+	_, err = storage.AddEvent(context.Background(), events[1])
 	if err != nil {
 		t.Error("Expected nil, got ", err)
 	}
-	err = storage.AddEvent(context.Background(), events[2])
+	_, err = storage.AddEvent(context.Background(), events[2])
 	if err != errors.ErrEventBusy {
 		t.Error("Expected ErrEventBusy, got ", err)
 	}

@@ -25,7 +25,7 @@ func NewStorage() *Storage {
 }
 
 // AddEvent - realizacia interface
-func (s *Storage) AddEvent(ctx context.Context, e *entities.Event) (id uint,error) {
+func (s *Storage) AddEvent(ctx context.Context, e *entities.Event) (uint, error) {
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
 	was := false
@@ -37,9 +37,9 @@ func (s *Storage) AddEvent(ctx context.Context, e *entities.Event) (id uint,erro
 	if !was {
 		s.currIndex++
 		s.events[s.currIndex] = e
-		return s.currIndex,nil
+		return s.currIndex, nil
 	}
-	return 0,errors.ErrEventBusy
+	return 0, errors.ErrEventBusy
 }
 
 // DeleteEvent - realizacia interface
