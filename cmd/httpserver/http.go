@@ -1,6 +1,8 @@
 package httpserver
 
 import (
+	"fmt"
+
 	"github.com/spf13/cobra"
 )
 
@@ -24,5 +26,5 @@ func init() {
 }
 
 func initConfig() {
-
+	fmt.Println("123")
 }
