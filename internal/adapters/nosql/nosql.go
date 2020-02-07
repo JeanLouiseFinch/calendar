@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"sync"
+	"time"
 
 	"github.com/JeanLouiseFinch/calendar/internal/domain/entities"
 	"github.com/JeanLouiseFinch/calendar/internal/domain/errors"
@@ -98,6 +99,33 @@ func (s *Storage) EditEvent(ctx context.Context, id uint, e *entities.Event) err
 		return nil
 	}
 	return errors.ErrEventNotFound
+}
+func (s *Storage) GetEventsByTimeRange(ctx context.Context, timeRange string) ([]*entities.Event, error) {
+	var duration time.Time
+
+	switch timeRange {
+	case entities.TimeRangeDay:
+		duration = time.Now().AddDate(0, 0, 1)
+	case entities.TimeRangeWeek:
+		duration = time.Now().AddDate(0, 0, 7)
+	case entities.TimeRangeMounth:
+		duration = time.Now().AddDate(0, 1, 0)
+	case entities.TimeRangeYear:
+		duration = time.Now().AddDate(1, 0, 0)
+	default:
+		return nil, errors.ErrTimeRange
+	}
+	now := time.Now()
+	result := make([]*entities.Event, 0, 0)
+	for _, value := range s.events {
+		if (value.Start.After(now) && value.Start.Before(duration)) || (value.Start == duration || value.Start == now) || (value.End.After(now) && value.End.Before(duration)) || (value.End == now || value.End == duration) {
+			result = append(result, value)
+		}
+	}
+	if len(result) > 0 {
+		return result, nil
+	}
+	return nil, errors.ErrEventNotFound
 }
 
 // String - realizacia interface

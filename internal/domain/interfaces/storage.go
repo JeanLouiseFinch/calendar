@@ -13,5 +13,6 @@ type Storage interface {
 	GetEventsByTitle(ctx context.Context, title string) ([]*entities.Event,error)
 	GetEventsByOwner(ctx context.Context, owner string) ([]*entities.Event,error)
 	EditEvent(ctx context.Context,id uint, e *entities.Event) error
+	GetEventsByTimeRange(ctx context.Context,timeRange string) ([]*entities.Event,error)
 	String() string
 }

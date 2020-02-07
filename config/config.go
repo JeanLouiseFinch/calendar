@@ -10,6 +10,7 @@ type Config struct {
 	IP      string
 	Port    int
 	LogFile string
+	Detail  string
 }
 
 func GetConfig(file string) (*Config, error) {

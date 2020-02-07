@@ -9,4 +9,5 @@ func (ee EventError) Error() string {
 var (
 	ErrEventBusy     = EventError("Vremya zanyato")
 	ErrEventNotFound = EventError("Sobutie ne naideno")
+	ErrTimeRange     = EventError("Nepravilnyi period")
 )

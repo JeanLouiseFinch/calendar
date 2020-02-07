@@ -2,6 +2,13 @@ package entities
 
 import "time"
 
+const (
+	TimeRangeYear   = "year"
+	TimeRangeMounth = "mounth"
+	TimeRangeWeek   = "week"
+	TimeRangeDay    = "day"
+)
+
 //Event - nashe vse
 type Event struct {
 	Start       time.Time
