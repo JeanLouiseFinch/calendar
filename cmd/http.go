@@ -1,17 +1,17 @@
 package httpserver
 
 import (
-
 	"github.com/spf13/cobra"
-
 )
+
 var (
 	// Used for flags.
-	cfgFile     string
+	cfgFile string
 
 	rootCmd = &cobra.Command{
 		Use:   "cobra",
 		Short: "A generator for Cobra based Applications",
+	}
 )
 
 // Execute executes the root command.
