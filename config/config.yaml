@@ -1,4 +1,4 @@
 IP: "127.0.0.1"
 Port: 7877
-LogFile: "../logger/mylog.log"
+LogFile: "mylog.log"
 Detail: "dev"

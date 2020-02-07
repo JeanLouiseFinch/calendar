@@ -6,9 +6,9 @@ import (
 	"go.uber.org/zap"
 )
 
-func GetLogger(detail,path string) (*zap.Logger, error) {
+func GetLogger(detail, path string) (*zap.Logger, error) {
 	var (
-		err error
+		err    error
 		config zap.Config
 	)
 	switch detail {
@@ -24,10 +24,10 @@ func GetLogger(detail,path string) (*zap.Logger, error) {
 			path,
 		}
 	}
-	logger,err := config.Build()
+	logger, err := config.Build()
 	if err != nil {
 		return nil, errors.New("Error build logger")
 	}
 	defer logger.Sync()
-	return logger,nil
+	return logger, nil
 }

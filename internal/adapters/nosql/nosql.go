@@ -19,10 +19,7 @@ type Storage struct {
 
 // NewStorage - sozdaem hranilishe
 func NewStorage() *Storage {
-	return &Storage{
-		events: make(map[uint]*entities.Event, 0),
-		mutex:  &sync.Mutex{},
-	}
+	return &Storage{events: make(map[uint]*entities.Event, 0), mutex: &sync.Mutex{}}
 }
 
 // AddEvent - realizacia interface
