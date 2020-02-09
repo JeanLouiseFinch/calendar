@@ -210,12 +210,87 @@ func (h *MyHandler) Update(resp http.ResponseWriter, req *http.Request) {
 	return
 }
 func (h *MyHandler) EventsForDay(resp http.ResponseWriter, req *http.Request) {
+	resp.Header().Set("Content-Type", "application/json")
+
+	events, err := h.Storage.GetEventsByTimeRange(context.Background(), entities.TimeRangeDay)
+	if err != nil {
+		he := HTTPError{
+			Error: err,
+		}
+		err = json.NewEncoder(resp).Encode(he)
+		if err != nil {
+			resp.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		resp.WriteHeader(http.StatusOK)
+		return
+	}
+	err = json.NewEncoder(resp).Encode(events)
+	if err != nil {
+		resp.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	for key := range events {
+		h.Logger.Info("Data for day:", zap.String("owner", events[key].Owner), zap.String("title", events[key].Title), zap.String("description", events[key].Description), zap.Any("start", events[key].Start), zap.Any("end", events[key].End))
+
+	}
+	resp.WriteHeader(http.StatusOK)
 	return
 }
 func (h *MyHandler) EventsForWeek(resp http.ResponseWriter, req *http.Request) {
+	resp.Header().Set("Content-Type", "application/json")
+
+	events, err := h.Storage.GetEventsByTimeRange(context.Background(), entities.TimeRangeWeek)
+	if err != nil {
+		he := HTTPError{
+			Error: err,
+		}
+		err = json.NewEncoder(resp).Encode(he)
+		if err != nil {
+			resp.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		resp.WriteHeader(http.StatusOK)
+		return
+	}
+	err = json.NewEncoder(resp).Encode(events)
+	if err != nil {
+		resp.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	for key := range events {
+		h.Logger.Info("Data for week:", zap.String("owner", events[key].Owner), zap.String("title", events[key].Title), zap.String("description", events[key].Description), zap.Any("start", events[key].Start), zap.Any("end", events[key].End))
+
+	}
+	resp.WriteHeader(http.StatusOK)
 	return
 }
 func (h *MyHandler) EventsForMonth(resp http.ResponseWriter, req *http.Request) {
+	resp.Header().Set("Content-Type", "application/json")
+
+	events, err := h.Storage.GetEventsByTimeRange(context.Background(), entities.TimeRangeMounth)
+	if err != nil {
+		he := HTTPError{
+			Error: err,
+		}
+		err = json.NewEncoder(resp).Encode(he)
+		if err != nil {
+			resp.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		resp.WriteHeader(http.StatusOK)
+		return
+	}
+	err = json.NewEncoder(resp).Encode(events)
+	if err != nil {
+		resp.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	for key := range events {
+		h.Logger.Info("Data for mounth:", zap.String("owner", events[key].Owner), zap.String("title", events[key].Title), zap.String("description", events[key].Description), zap.Any("start", events[key].Start), zap.Any("end", events[key].End))
+
+	}
+	resp.WriteHeader(http.StatusOK)
 	return
 }
 func (h *MyHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {}
