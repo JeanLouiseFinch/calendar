@@ -6,3 +6,153 @@
 2020-02-07T17:51:41.076Z	INFO	http/server.go:38	Get zapros on only post page
 2020-02-07T17:54:30.680Z	INFO	http/server.go:38	Get zapros on only post page
 2020-02-07T17:54:51.952Z	INFO	http/server.go:34	Runnig server...	{"host": "127.0.0.1", "port": 7877}
+2020-02-09T14:53:28.038Z	INFO	http/server.go:38	Runnig server...	{"host": "127.0.0.1", "port": 7877}
+2020-02-09T14:54:08.103Z	INFO	http/server.go:45	Get zapros on only post page
+2020-02-09T14:55:40.656Z	INFO	http/server.go:38	Runnig server...	{"host": "127.0.0.1", "port": 7877}
+2020-02-09T14:56:55.030Z	ERROR	http/server.go:67	parsing input data error	{"error": "invalid character 'o' looking for beginning of value"}
+github.com/JeanLouiseFinch/calendar/server/http.(*MyHandler).Add
+	/home/ivan/Desktop/cal/server/http/server.go:67
+github.com/JeanLouiseFinch/calendar/server/http.(*MyHandler).postOnly.func1
+	/home/ivan/Desktop/cal/server/http/server.go:49
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2007
+net/http.(*ServeMux).ServeHTTP
+	/usr/local/go/src/net/http/server.go:2387
+net/http.serverHandler.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2802
+net/http.(*conn).serve
+	/usr/local/go/src/net/http/server.go:1890
+2020-02-09T14:57:20.654Z	INFO	http/server.go:38	Runnig server...	{"host": "127.0.0.1", "port": 7877}
+2020-02-09T14:57:37.709Z	ERROR	http/server.go:67	parsing input data error	{"error": "invalid character 'o' looking for beginning of value"}
+github.com/JeanLouiseFinch/calendar/server/http.(*MyHandler).Add
+	/home/ivan/Desktop/cal/server/http/server.go:67
+github.com/JeanLouiseFinch/calendar/server/http.(*MyHandler).postOnly.func1
+	/home/ivan/Desktop/cal/server/http/server.go:49
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2007
+net/http.(*ServeMux).ServeHTTP
+	/usr/local/go/src/net/http/server.go:2387
+net/http.serverHandler.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2802
+net/http.(*conn).serve
+	/usr/local/go/src/net/http/server.go:1890
+2020-02-09T15:11:21.829Z	ERROR	http/server.go:67	parsing input data error	{"error": "invalid character 'o' looking for beginning of value"}
+github.com/JeanLouiseFinch/calendar/server/http.(*MyHandler).Add
+	/home/ivan/Desktop/cal/server/http/server.go:67
+github.com/JeanLouiseFinch/calendar/server/http.(*MyHandler).postOnly.func1
+	/home/ivan/Desktop/cal/server/http/server.go:49
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2007
+net/http.(*ServeMux).ServeHTTP
+	/usr/local/go/src/net/http/server.go:2387
+net/http.serverHandler.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2802
+net/http.(*conn).serve
+	/usr/local/go/src/net/http/server.go:1890
+2020-02-09T15:11:43.598Z	ERROR	http/server.go:67	parsing input data error	{"error": "invalid character 'o' looking for beginning of value"}
+github.com/JeanLouiseFinch/calendar/server/http.(*MyHandler).Add
+	/home/ivan/Desktop/cal/server/http/server.go:67
+github.com/JeanLouiseFinch/calendar/server/http.(*MyHandler).postOnly.func1
+	/home/ivan/Desktop/cal/server/http/server.go:49
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2007
+net/http.(*ServeMux).ServeHTTP
+	/usr/local/go/src/net/http/server.go:2387
+net/http.serverHandler.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2802
+net/http.(*conn).serve
+	/usr/local/go/src/net/http/server.go:1890
+2020-02-09T15:21:09.545Z	ERROR	http/server.go:67	parsing input data error	{"error": "EOF"}
+github.com/JeanLouiseFinch/calendar/server/http.(*MyHandler).Add
+	/home/ivan/Desktop/cal/server/http/server.go:67
+github.com/JeanLouiseFinch/calendar/server/http.(*MyHandler).postOnly.func1
+	/home/ivan/Desktop/cal/server/http/server.go:49
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2007
+net/http.(*ServeMux).ServeHTTP
+	/usr/local/go/src/net/http/server.go:2387
+net/http.serverHandler.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2802
+net/http.(*conn).serve
+	/usr/local/go/src/net/http/server.go:1890
+2020-02-09T15:22:07.845Z	INFO	http/server.go:38	Runnig server...	{"host": "127.0.0.1", "port": 7877}
+2020-02-09T15:22:20.260Z	ERROR	http/server.go:67	parsing input data error	{"error": "EOF"}
+github.com/JeanLouiseFinch/calendar/server/http.(*MyHandler).Add
+	/home/ivan/Desktop/cal/server/http/server.go:67
+github.com/JeanLouiseFinch/calendar/server/http.(*MyHandler).postOnly.func1
+	/home/ivan/Desktop/cal/server/http/server.go:49
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2007
+net/http.(*ServeMux).ServeHTTP
+	/usr/local/go/src/net/http/server.go:2387
+net/http.serverHandler.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2802
+net/http.(*conn).serve
+	/usr/local/go/src/net/http/server.go:1890
+2020-02-09T15:24:50.100Z	INFO	http/server.go:37	Runnig server...	{"host": "127.0.0.1", "port": 7877}
+2020-02-09T15:24:55.918Z	INFO	http/server.go:64	Data:	{"owner": "me"}
+2020-02-09T15:29:16.792Z	INFO	http/server.go:37	Runnig server...	{"host": "127.0.0.1", "port": 7877}
+2020-02-09T15:29:17.931Z	INFO	http/server.go:70	Data:	{"owner": "me", "title": "title1", "description": "desc1", "start": "dfaf", "end": "fsadfSDfg"}
+2020-02-09T15:56:54.819Z	INFO	http/server.go:37	Runnig server...	{"host": "127.0.0.1", "port": 7877}
+2020-02-09T15:57:18.654Z	INFO	http/server.go:37	Runnig server...	{"host": "127.0.0.1", "port": 7877}
+2020-02-09T15:58:44.849Z	INFO	http/server.go:37	Runnig server...	{"host": "127.0.0.1", "port": 7877}
+2020-02-09T15:58:54.699Z	ERROR	http/server.go:72	Parse time	{"error": "Nepravilnui format(need yyyy-mm-dd"}
+github.com/JeanLouiseFinch/calendar/server/http.(*MyHandler).Add
+	/home/ivan/Desktop/cal/server/http/server.go:72
+github.com/JeanLouiseFinch/calendar/server/http.(*MyHandler).postOnly.func1
+	/home/ivan/Desktop/cal/server/http/server.go:48
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2007
+net/http.(*ServeMux).ServeHTTP
+	/usr/local/go/src/net/http/server.go:2387
+net/http.serverHandler.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2802
+net/http.(*conn).serve
+	/usr/local/go/src/net/http/server.go:1890
+2020-02-09T15:59:37.639Z	INFO	http/server.go:83	Data:	{"owner": "me", "title": "title1", "description": "desc1", "start": "2019-04-17T00:00:00.000Z", "end": "2015-02-13T00:00:00.000Z"}
+2020-02-09T16:20:26.781Z	INFO	http/server.go:40	Runnig server...	{"host": "127.0.0.1", "port": 7877}
+2020-02-09T16:20:49.149Z	ERROR	http/server.go:76	Parse time	{"error": "Nepravilnui format(need yyyy-mm-dd"}
+github.com/JeanLouiseFinch/calendar/server/http.(*MyHandler).Add
+	/home/ivan/Desktop/cal/server/http/server.go:76
+github.com/JeanLouiseFinch/calendar/server/http.(*MyHandler).postOnly.func1
+	/home/ivan/Desktop/cal/server/http/server.go:51
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2007
+net/http.(*ServeMux).ServeHTTP
+	/usr/local/go/src/net/http/server.go:2387
+net/http.serverHandler.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2802
+net/http.(*conn).serve
+	/usr/local/go/src/net/http/server.go:1890
+2020-02-09T16:21:10.663Z	INFO	http/server.go:113	Data:	{"ID": 1, "owner": "me", "title": "title1", "description": "desc1", "start": "2015-01-01T00:00:00.000Z", "end": "2015-02-13T00:00:00.000Z"}
+2020-02-09T16:37:54.776Z	INFO	http/server.go:41	Runnig server...	{"host": "127.0.0.1", "port": 7877}
+2020-02-09T16:38:08.182Z	INFO	http/server.go:114	Data:	{"ID": 1, "owner": "me", "title": "title1", "description": "desc1", "start": "2015-01-01T00:00:00.000Z", "end": "2015-02-13T00:00:00.000Z"}
+2020-02-09T16:38:27.141Z	INFO	http/server.go:114	Data:	{"ID": 2, "owner": "me2", "title": "title12", "description": "desc12", "start": "2019-01-01T00:00:00.000Z", "end": "2025-02-13T00:00:00.000Z"}
+2020-02-09T16:39:09.952Z	INFO	http/server.go:208	Update data:	{"ID": 2, "owner": "not-me2", "title": "title12", "description": "desc12", "start": "2019-01-01T00:00:00.000Z", "end": "2025-02-13T00:00:00.000Z"}
+2020-02-09T16:39:24.227Z	ERROR	http/server.go:164	Parse id	{"error": "strconv.Atoi: parsing \"x\": invalid syntax"}
+github.com/JeanLouiseFinch/calendar/server/http.(*MyHandler).Update
+	/home/ivan/Desktop/cal/server/http/server.go:164
+github.com/JeanLouiseFinch/calendar/server/http.(*MyHandler).postOnly.func1
+	/home/ivan/Desktop/cal/server/http/server.go:52
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2007
+net/http.(*ServeMux).ServeHTTP
+	/usr/local/go/src/net/http/server.go:2387
+net/http.serverHandler.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2802
+net/http.(*conn).serve
+	/usr/local/go/src/net/http/server.go:1890
+2020-02-09T16:39:54.036Z	INFO	http/server.go:148	Delete:	{"ID": 2}
+2020-02-09T16:40:10.874Z	ERROR	http/server.go:123	Parse id	{"error": "strconv.Atoi: parsing \"231d\": invalid syntax"}
+github.com/JeanLouiseFinch/calendar/server/http.(*MyHandler).Delete
+	/home/ivan/Desktop/cal/server/http/server.go:123
+github.com/JeanLouiseFinch/calendar/server/http.(*MyHandler).postOnly.func1
+	/home/ivan/Desktop/cal/server/http/server.go:52
+net/http.HandlerFunc.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2007
+net/http.(*ServeMux).ServeHTTP
+	/usr/local/go/src/net/http/server.go:2387
+net/http.serverHandler.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2802
+net/http.(*conn).serve
+	/usr/local/go/src/net/http/server.go:1890

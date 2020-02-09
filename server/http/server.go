@@ -1,12 +1,15 @@
 package http
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/JeanLouiseFinch/calendar/config"
-	"github.com/JeanLouiseFinch/calendar/nosql"
+	"github.com/JeanLouiseFinch/calendar/internal/adapters/nosql"
+	"github.com/JeanLouiseFinch/calendar/internal/domain/entities"
 	"go.uber.org/zap"
 )
 
@@ -60,20 +63,150 @@ func (h *MyHandler) getOnly(hh http.HandlerFunc) http.HandlerFunc {
 	}
 }
 func (h *MyHandler) Add(resp http.ResponseWriter, req *http.Request) {
-	decoder := json.NewDecoder(req.Body)
-	var data EventHTTP
-	err := decoder.Decode(&data)
-	if err != nil {
-		h.Logger.Error("parsing input data error", zap.Error(err))
-	} else {
-		h.Logger.Info("Data:", zap.String("owner", data.Owner), zap.String("title", data.Title), zap.String("description", data.Description), zap.String("start", data.Start), zap.String("end", data.End))
+	req.ParseForm()
+	resp.Header().Set("Content-Type", "application/json")
+	newEvent := EventHTTP{
+		Description: req.Form.Get("description"),
+		EndString:   req.Form.Get("end"),
+		Owner:       req.Form.Get("owner"),
+		StartString: req.Form.Get("start"),
+		Title:       req.Form.Get("title"),
 	}
+	start, err := toTimeFromString(newEvent.StartString)
+	if err != nil {
+		h.Logger.Error("Parse time", zap.Error(err))
+		resp.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	newEvent.Start = start
+	end, err := toTimeFromString(newEvent.EndString)
+	if err != nil {
+		h.Logger.Error("Parse time", zap.Error(err))
+		resp.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	newEvent.End = end
+	val, err := h.Storage.AddEvent(context.Background(), &entities.Event{
+		Owner:       newEvent.Owner,
+		Title:       newEvent.Title,
+		Description: newEvent.Description,
+		Start:       start,
+		End:         end,
+	})
+	if err != nil {
+		he := HTTPError{
+			Error: err,
+		}
+		err = json.NewEncoder(resp).Encode(he)
+		if err != nil {
+			resp.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		resp.WriteHeader(http.StatusOK)
+		return
+	}
+	newEvent.ID = val
+	err = json.NewEncoder(resp).Encode(newEvent)
+	if err != nil {
+		resp.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	h.Logger.Info("Data:", zap.Int("ID", int(newEvent.ID)), zap.String("owner", newEvent.Owner), zap.String("title", newEvent.Title), zap.String("description", newEvent.Description), zap.Any("start", start), zap.Any("end", end))
+	resp.WriteHeader(http.StatusOK)
 	return
 }
 func (h *MyHandler) Delete(resp http.ResponseWriter, req *http.Request) {
+	req.ParseForm()
+	resp.Header().Set("Content-Type", "application/json")
+	id, err := strconv.Atoi(req.Form.Get("id"))
+	if err != nil {
+		h.Logger.Error("Parse id", zap.Error(err))
+		resp.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	err = h.Storage.DeleteEvent(context.Background(), uint(id))
+	if err != nil {
+		he := HTTPError{
+			Error: err,
+		}
+		err = json.NewEncoder(resp).Encode(he)
+		if err != nil {
+			resp.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		resp.WriteHeader(http.StatusOK)
+		return
+	}
+	newEvent := EventHTTP{
+		ID: uint(id),
+	}
+	err = json.NewEncoder(resp).Encode(newEvent)
+	if err != nil {
+		resp.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	h.Logger.Info("Delete:", zap.Int("ID", int(newEvent.ID)))
+	resp.WriteHeader(http.StatusOK)
 	return
 }
 func (h *MyHandler) Update(resp http.ResponseWriter, req *http.Request) {
+	req.ParseForm()
+	resp.Header().Set("Content-Type", "application/json")
+	newEvent := EventHTTP{
+		Description: req.Form.Get("description"),
+		EndString:   req.Form.Get("end"),
+		Owner:       req.Form.Get("owner"),
+		StartString: req.Form.Get("start"),
+		Title:       req.Form.Get("title"),
+	}
+	id, err := strconv.Atoi(req.Form.Get("id"))
+	if err != nil {
+		h.Logger.Error("Parse id", zap.Error(err))
+		resp.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	newEvent.ID = uint(id)
+	start, err := toTimeFromString(newEvent.StartString)
+	if err != nil {
+		h.Logger.Error("Parse time", zap.Error(err))
+		resp.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	newEvent.Start = start
+	end, err := toTimeFromString(newEvent.EndString)
+	if err != nil {
+		h.Logger.Error("Parse time", zap.Error(err))
+		resp.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	newEvent.End = end
+	err = h.Storage.EditEvent(context.Background(), newEvent.ID, &entities.Event{
+		Owner:       newEvent.Owner,
+		Title:       newEvent.Title,
+		Description: newEvent.Description,
+		Start:       start,
+		End:         end,
+	})
+	if err != nil {
+		he := HTTPError{
+			Error: err,
+		}
+		err = json.NewEncoder(resp).Encode(he)
+		if err != nil {
+			resp.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		resp.WriteHeader(http.StatusOK)
+		return
+	}
+
+	err = json.NewEncoder(resp).Encode(newEvent)
+	if err != nil {
+		resp.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	h.Logger.Info("Update data:", zap.Int("ID", int(newEvent.ID)), zap.String("owner", newEvent.Owner), zap.String("title", newEvent.Title), zap.String("description", newEvent.Description), zap.Any("start", start), zap.Any("end", end))
+	resp.WriteHeader(http.StatusOK)
 	return
 }
 func (h *MyHandler) EventsForDay(resp http.ResponseWriter, req *http.Request) {

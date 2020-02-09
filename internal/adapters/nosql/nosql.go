@@ -26,6 +26,12 @@ func NewStorage() *Storage {
 func (s *Storage) AddEvent(ctx context.Context, e *entities.Event) (uint, error) {
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
+	if e.End.Before(e.Start) {
+		return 0, errors.ErrTimeRange
+	}
+	if e.Title == "" || e.Owner == "" {
+		return 0, errors.ErrFieldEmpty
+	}
 	was := false
 	for _, value := range s.events {
 		if (e.Start.After(value.Start) && e.Start.Before(value.End)) || (e.End.After(value.Start) && e.End.Before(value.End) || e.Start.Equal(value.Start) || e.Start.Equal(value.End) || e.End.Equal(value.Start) || e.End.Equal(value.End)) {
